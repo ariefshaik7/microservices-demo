@@ -6,55 +6,6 @@ A modern, scalable e-commerce application built with a microservices architectur
 
 The application is composed of multiple loosely coupled microservices, each responsible for a specific domain. An Nginx reverse proxy sits in front of all services, acting as an API Gateway.
 
-```mermaid
-graph TD
-    Client[Client Browser]
-    Nginx[Nginx Gateway (Port 80)]
-    
-    subgraph Frontend
-        FE[Frontend (React + Vite)]
-    end
-    
-    subgraph Backend Services
-        Product[Product Service]
-        Order[Order Service]
-        User[User Service]
-        Cart[Cart Service]
-        Payment[Payment Service]
-        Shipping[Shipping Service]
-        Email[Email Service]
-        Checkout[Checkout Service]
-        Currency[Currency Service]
-    end
-    
-    subgraph Database
-        DB[(PostgreSQL)]
-    end
-
-    Client -->|HTTP/80| Nginx
-    
-    Nginx -->|/| FE
-    Nginx -->|/api/products| Product
-    Nginx -->|/api/orders| Order
-    Nginx -->|/api/users| User
-    Nginx -->|/api/cart| Cart
-    Nginx -->|/api/payment| Payment
-    Nginx -->|/api/shipping| Shipping
-    Nginx -->|/api/email| Email
-    Nginx -->|/api/checkout| Checkout
-    Nginx -->|/api/currency| Currency
-
-    Checkout --> Cart
-    Checkout --> Payment
-    Checkout --> Shipping
-    Checkout --> Email
-    Checkout --> Order
-    
-    Product --> DB
-    Order --> DB
-    User --> DB
-    Cart --> DB
-```
 
 ## 🚀 Tech Stack
 
