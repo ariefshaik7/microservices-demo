@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useCart } from '../context/CartContext';
+import { useCurrency } from '../context/CurrencyContext';
 import { useNavigate } from 'react-router-dom';
 
 export default function CheckoutPage() {
     const { items: cart, clearCart } = useCart();
+    const { formatPrice } = useCurrency();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -204,7 +206,7 @@ export default function CheckoutPage() {
                             style={{ width: '100%', marginTop: '30px', padding: '15px', fontSize: '1.1rem' }}
                             disabled={loading}
                         >
-                            {loading ? 'Processing...' : `Pay $${total.toFixed(2)}`}
+                            {loading ? 'Processing...' : `Pay ${formatPrice(total)}`}
                         </button>
                     </form>
                 </div>
@@ -215,12 +217,12 @@ export default function CheckoutPage() {
                         {cart.map((item) => (
                             <div key={item.id} style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '15px' }}>
                                 <span>{item.name} x {item.quantity}</span>
-                                <span>${(item.price * item.quantity).toFixed(2)}</span>
+                                <span>{formatPrice(item.price * item.quantity)}</span>
                             </div>
                         ))}
                         <div style={{ borderTop: '1px solid #ddd', marginTop: '20px', paddingTop: '20px', display: 'flex', justifyContent: 'space-between', fontWeight: 'bold', fontSize: '1.2rem' }}>
                             <span>Total</span>
-                            <span>${total.toFixed(2)}</span>
+                            <span>{formatPrice(total)}</span>
                         </div>
                     </div>
                 </div>
