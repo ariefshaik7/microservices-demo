@@ -10,8 +10,10 @@ const pool = new Pool({
 export const query = (text: string, params?: any[]) => pool.query(text, params);
 
 export const initDb = async () => {
-    try {
-        await query(`
+    let retries = 10;
+    while (retries > 0) {
+        try {
+            await query(`
       CREATE TABLE IF NOT EXISTS products (
         id SERIAL PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
@@ -21,9 +23,13 @@ export const initDb = async () => {
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
     `);
-        console.log('Database initialized successfully');
-    } catch (err) {
-        console.error('Error initializing database:', err);
-        throw err;
+            console.log('Database initialized successfully');
+            return;
+        } catch (err) {
+            console.error(`Error initializing database (retries left: ${retries}):`, err);
+            retries -= 1;
+            await new Promise(res => setTimeout(res, 5000));
+        }
     }
+    throw new Error('Could not initialize database after multiple retries');
 };
