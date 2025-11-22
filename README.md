@@ -1,13 +1,13 @@
-# The Wardrobe Co. - Microservices Cloth Store
 
-A modern, scalable e-commerce application built with a microservices architecture. This project demonstrates a full-stack implementation using React, Node.js, TypeScript, Docker, and PostgreSQL.
+**The Wardrobe Co.** is a microservices demo application. The application is a web-based e-commerce app where users can browse items, add them to the cart, and purchase them.
+
+This project demonstrates a full-stack implementation using React, Node.js, TypeScript, Docker, and PostgreSQL.
 
 ## 🏗️ Architecture
 
 The application is composed of multiple loosely coupled microservices, each responsible for a specific domain. An Nginx reverse proxy sits in front of all services, acting as an API Gateway.
 
-
-## 🚀 Tech Stack
+##  Tech Stack
 
 - **Frontend:** React, TypeScript, Vite, Axios, Context API
 - **Backend:** Node.js, Express, TypeScript
@@ -17,18 +17,27 @@ The application is composed of multiple loosely coupled microservices, each resp
 
 ## 📦 Microservices Overview
 
-| Service | Port | Description |
-|---------|------|-------------|
-| **Frontend** | 5173 | React-based user interface. |
-| **Product Service** | 3001 | Manages product catalog and inventory. |
-| **Order Service** | 3002 | Handles order creation and history. |
-| **User Service** | 3003 | Manages user authentication and profiles. |
-| **Cart Service** | 3004 | Manages temporary shopping cart data. |
-| **Payment Service** | 3005 | Mock payment processing. |
-| **Shipping Service** | 3006 | Handles shipping calculations. |
-| **Email Service** | 3007 | Mock email notifications. |
-| **Checkout Service** | 3008 | Orchestrates the checkout workflow. |
-| **Currency Service** | 3009 | Handles currency conversion rates. |
+| Service | Description |
+| ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| [frontend](/src/frontend)                           | React-based user interface. Exposes an HTTP server to serve the website. |
+| [product-service](/src/product-service)             | Provides the list of products from the database and ability to search products and get individual products. |
+| [order-service](/src/order-service)                 | Handles order creation and history. |
+| [user-service](/src/user-service)                   | Manages user authentication and profiles. |
+| [cart-service](/src/cart-service)                   | Stores the items in the user's shopping cart in PostgreSQL and retrieves it. |
+| [payment-service](/src/payment-service)             | Charges the given credit card info (mock) with the given amount and returns a transaction ID. |
+| [shipping-service](/src/shipping-service)           | Gives shipping cost estimates based on the shopping cart. Ships items to the given address (mock). |
+| [email-service](/src/email-service)                 | Sends users an order confirmation email (mock). |
+| [checkout-service](/src/checkout-service)           | Retrieves user cart, prepares order and orchestrates the payment, shipping and the email notification. |
+| [currency-service](/src/currency-service)           | Converts one money amount to another currency. Uses real values fetched from external API. |
+
+---
+## Application UI
+                 
+| Home Page                                      | Checkout Screen                               | Login Page                                   |
+| -----------------------------------------------|-----------------------------------------------|----------------------------------------------|
+| [![Screenshot of store homepage](/docs/images/wardrobe-frontend-1.png)](/docs/images/wardrobe-frontend-1.png) | [![Screenshot of checkout screen](/docs/images/wardrobe-frontend-2.png)](/docs/images/wardrobe-frontend-2.png) | [![Screenshot of Login page](/docs/images/wardrobe-frontend-3.png)](/docs/images/wardrobe-frontend-3.png) |
+
+
 
 ## 🛠️ Getting Started
 
