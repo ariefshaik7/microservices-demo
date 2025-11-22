@@ -17,6 +17,7 @@ services:
     environment:
       - PORT=3001
       - DATABASE_URL=postgresql://postgres:password@postgres:5432/cloth_store
+    command: npm run dev
     depends_on:
       - postgres
     ports:
